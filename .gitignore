@@ -1,0 +1,51 @@
+# ---------------------------------------------------------------
+# 3GsO-Platform
+# Stack: Astro + TypeScript, static output.
+# See docs/07_Technology_Architecture.md and docs/08_Project_Structure.md
+# ---------------------------------------------------------------
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Astro build output and generated types
+dist/
+.astro/
+
+# Cloudflare / Wrangler local state
+.wrangler/
+
+# Environment and secrets — never committed (docs/11_Technical_Standards.md)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript and tooling caches
+*.tsbuildinfo
+.cache/
+.eslintcache
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+
+# OS-generated files
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Working material, not part of the platform (docs/08_Project_Structure.md, D-030)
+# Source PDFs, CV, raw screenshots and visual references are inputs, not deliverables.
+resources/

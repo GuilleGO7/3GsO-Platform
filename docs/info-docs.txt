@@ -1,0 +1,68 @@
+Aquí vivirá toda la documentación del proyecto.
+
+No es código.
+
+Aquí estarán todos los documentos que iremos escribiendo juntos.
+
+Ejemplo:
+
+Visión
+Arquitectura
+Diseño
+Contenido
+Roadmap
+
+Es, literalmente, el "cerebro" del proyecto.
+
+
+ARCHIVOS: 
+
+- 00_Project_Vision.md --> Documento que define la visión general del proyecto 3G'sO. En él se establece el propósito de la
+plataforma, el posicionamiento profesional, el público objetivo y los criterios de éxito. Es el propietario único de la
+definición de audiencia.
+
+- 01_Brand_Identity.md --> Define la identidad de la marca 3G'sO. Establece cómo debe percibirse profesionalmente,
+los valores que representa, la personalidad, el tono de comunicación y la imagen que se quiere transmitir de forma 
+consistente en toda la plataforma.
+
+- 02_Experience_Architecture.md --> Define la experiencia completa del usuario dentro de la plataforma. 
+Describe el recorrido emocional, el propósito de cada sección, las sensaciones que debe transmitir y las 
+preguntas que responde, asegurando que toda la navegación cuente una historia coherente y memorable.
+
+- 03_User_Journey.md --> Define el recorrido completo del usuario dentro de la plataforma. Describe qué ocurre desde el 
+momento en que entra hasta que abandona la web, incluyendo qué ve, qué siente, qué descubre y qué acción queremos que realice 
+en cada etapa. Sirve como guía para el diseño de la experiencia antes de escribir cualquier línea de código.
+
+- 04_Visual_System.md --> Defines the visual direction and foundational design principles of the 3G'sO platform,
+including color, typography, layout, spacing, imagery, iconography, motion, components, responsive behavior and accessibility.
+
+- 05_Content_Strategy.md --> Defines what 3G'sO communicates about Guillermo, the main content areas of the platform,
+how his professional story and projects are presented, and the principles used to create and curate content over time.
+
+- 06_Design_System.md --> Defines the concrete design rules and reusable visual tokens of the 3G'sO platform, 
+establishing the foundation for consistent implementation across typography, color, spacing, layout, components, 
+interactions and responsive behavior.
+
+- 07_Technology_Architecture.md --> Defines the technical architecture and engineering principles of the 3G'sO platform, 
+including its frontend, backend, data, content, infrastructure, integrations, security, performance, scalability, 
+maintainability and cost constraints.
+
+- 08_Project_Structure.md --> Defines the repository structure, folder organization, naming conventions and separation of 
+responsibilities within the 3G'sO platform codebase.
+
+- 09_Feature_Specification.md --> Defines the functional scope of the 3G'sO platform, prioritizing its core features, 
+user-facing capabilities and MVP boundaries before implementation.
+
+- 10_Implementation_Roadmap.md --> Defines the implementation phases, development priorities and execution sequence 
+required to build the 3G'sO platform from its initial foundation to its first complete release.
+
+- 11_Technical_Standards.md --> Defines the engineering standards, coding conventions, Git workflow, testing practices
+and quality requirements used to maintain a consistent and maintainable 3G'sO codebase.
+
+- 12_Decision_Record.md --> Registro vivo de las decisiones significativas del proyecto (stack, arquitectura de información,
+diseño, alcance, infraestructura y coste), con su razonamiento y las condiciones que justificarían revisarlas. Se añade una
+entrada cada vez que se toma una decisión de este tipo.
+
+
+NOTA: el stack confirmado es Astro + TypeScript, salida estática, sin coste recurrente. Los documentos 00-12 son la
+fuente de verdad del proyecto y deben mantenerse coherentes entre sí.
