@@ -2,7 +2,7 @@
 Document Version: 2.0
 Status: Approved
 Purpose: Define the Astro repository structure, content model and naming conventions of the 3G'sO platform.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Project Structure
@@ -104,6 +104,8 @@ Each of these is created when its first real occupant exists, and not before:
 ## Content Model
 
 Three collections, defined and validated in `src/content.config.ts`. Invalid content fails the build.
+
+Each collection declares a `glob()` loader pointing at its directory under `src/content/`, alongside its Zod schema. The Content Layer API requires an explicit loader per collection; there is no implicit directory-to-collection mapping.
 
 ### `projects`
 

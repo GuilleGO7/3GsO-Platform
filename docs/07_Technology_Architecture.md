@@ -2,7 +2,7 @@
 Document Version: 2.0
 Status: Approved
 Purpose: Define the confirmed technology stack, engineering principles and long-term technical direction of the 3G'sO platform.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Technology Architecture
@@ -17,7 +17,7 @@ These decisions are made. They are not open questions.
 
 | Concern | Decision |
 |---|---|
-| Framework | **Astro 5**, static output (`output: 'static'`) |
+| Framework | **Astro 7**, static output (`output: 'static'`) |
 | Language | **TypeScript**, strict (`astro/tsconfigs/strict`) |
 | UI runtime | **None.** `.astro` components only — no React, Vue or Svelte |
 | Interactivity | Vanilla TypeScript, used sparingly |

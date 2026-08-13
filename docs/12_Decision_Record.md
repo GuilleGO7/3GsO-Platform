@@ -2,7 +2,7 @@
 Document Version: 1.0
 Status: Living document
 Purpose: Record meaningful decisions made about the 3G'sO platform, with the reasoning behind them.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Decision Record
@@ -23,9 +23,10 @@ This exists so that a decision is made once. When a document and this record dis
 
 ## 2026-08-12 — Foundation
 
-**D-001 · Stack: Astro 5 + TypeScript, static output**
+**D-001 · Stack: Astro + TypeScript, static output**
 The platform is content-first and largely static; its quality bar is typography, reading experience and load speed. Astro ships zero JavaScript by default, treats Markdown as a typed first-class source, and produces a plain static directory hostable anywhere for nothing. A general-purpose application framework would add a client runtime and hosting model the requirements do not justify.
 *Revisit if* the platform requires server-rendered or authenticated functionality that Astro adapters cannot serve.
+*Amended 2026-08-13:* this entry originally specified Astro 5. The major version is now Astro 7 — see D-031. The reasoning above is version-independent and stands unchanged.
 
 **D-002 · No UI framework**
 No island in v1 earns a framework runtime. The only interactivity is a mobile navigation toggle and small progressive enhancements. Astro allows adding a framework per component later without restructuring.
@@ -148,10 +149,23 @@ Most visitors arrive at a project page directly from a shared link, so how that 
 
 **D-029 · `3GsO-Platform` is an independent Git repository**
 The project previously sat untracked inside a repository rooted at the user's home directory, whose working tree contained credentials and personal data. The documentation — the project's source of truth — was therefore unversioned, and any broad `git add` risked committing secrets.
-*Status:* pending execution as the first action of Phase 0.
+*Status:* executed 2026-08-13. The repository root is `C:/Users/User/Proyectos/3GsO-Platform`, independent of any parent repository, with the documentation committed in `41bbfe4`.
 
 **D-030 · Working material stays outside the repository**
 Source PDFs, the CV, raw screenshots and visual references are inputs to the platform, not part of it.
+
+---
+
+## 2026-08-13 — Framework Version
+
+**D-031 · Astro 7, not Astro 5**
+D-001 originally pinned Astro 5, written when that was the current major. It is not: Astro 5 is out of security support, and no fix has been backported to the 5.x line. `npm audit` against a clean install reports 10 advisories on Astro 5.18.2, 5 on Astro 6.4.8 — the line still receives partial backports — and **0 on Astro 7.2.1**.
+
+Actual production exposure on Astro 5 was near zero: seven of the eight Astro advisories require SSR, hydrated islands, view transitions or attacker-controlled input, none of which exist in a static build with no user input. The decisive argument is not present exposure but future exposure — every subsequent advisory would also go unpatched, and the View Transition advisory would activate in Phase 5.
+
+Migration cost was near zero because the repository contained only the scaffold. The documented architecture survives intact: `src/content.config.ts`, `output: 'static'`, `astro/tsconfigs/strict`, `astro:assets` and `@astrojs/sitemap` all carry over unchanged. Three points of the v6/v7 migration touch the platform and are verified in Phase 2 when the first real content is authored: collections must declare a `glob()` loader (recorded in `08_Project_Structure.md`), Markdown is rendered by Astro's native pipeline rather than remark/rehype, and `compressHTML` now defaults to `'jsx'` whitespace handling.
+
+*Revisit* at the next major, on the same test: whether the current line is the one receiving security fixes.
 
 ---
 
