@@ -29,7 +29,7 @@ These decisions are made. They are not open questions.
 | SEO | Hand-written metadata component + `@astrojs/sitemap` |
 | Backend | **None** |
 | Database | **None** |
-| Hosting | **Cloudflare Pages**, free tier, `*.pages.dev` |
+| Hosting | **Cloudflare Workers** with static assets, free tier, `*.workers.dev` |
 | Analytics | **None** |
 | Recurring cost | **€0** |
 
@@ -85,7 +85,7 @@ Content lives as Markdown with typed, Zod-validated frontmatter. Invalid or inco
 
 **The platform has zero recurring software or infrastructure cost.**
 
-Hosting, HTTPS, builds and preview deployments are all covered by the Cloudflare Pages free tier. No domain is registered in v1; the platform launches on its `*.pages.dev` URL. No analytics service is used. No paid font, asset or service is used.
+Hosting, HTTPS, builds and preview deployments are all covered by the Cloudflare free tier. No domain is registered in v1; the platform launches on its `*.workers.dev` URL. No analytics service is used. No paid font, asset or service is used.
 
 The only development tool paid for by the creator is Claude Pro, which is an existing resource and not a platform dependency.
 
@@ -102,7 +102,7 @@ Responsibilities remain separated even though they are not separately deployed:
 - **Presentation** — Astro components and layouts.
 - **Content** — Markdown collections, independent of presentation.
 - **Configuration and data** — typed modules in `src/data/`.
-- **Infrastructure** — Cloudflare Pages, configured through the repository.
+- **Infrastructure** — Cloudflare Workers with static assets, configured through the repository.
 
 There are no services, no runtime server, no database and no API in v1. If a real requirement emerges, Astro's server adapters offer a path to server-rendered routes without abandoning the existing codebase.
 
@@ -148,7 +148,7 @@ This is the only concession made to a deferred capability, and it costs nothing 
 
 ## Infrastructure
 
-**Hosting** — Cloudflare Pages. Chosen for a genuinely free tier with custom domains and unlimited bandwidth, automatic HTTPS, per-branch preview deployments, and a free path to server rendering if the platform ever needs it. The build output is a static directory, so migration cost is near zero.
+**Hosting** — Cloudflare Workers with static assets. Chosen for a genuinely free tier with custom domains and unlimited bandwidth, automatic HTTPS, per-branch preview deployments, and a free path to server rendering if the platform ever needs it. The build output is a static directory, so migration cost is near zero. See D-032 for the move from Cloudflare Pages.
 
 **Builds** — Cloudflare builds on push to `main`. A failing build blocks the deployment, which makes a separate CI pipeline unnecessary in v1.
 

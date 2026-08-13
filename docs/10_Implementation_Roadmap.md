@@ -2,7 +2,7 @@
 Document Version: 2.0
 Status: Approved
 Purpose: Define the implementation phases, their order and the exit criteria that move the 3G'sO platform from an empty repository to a public v1.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Implementation Roadmap
@@ -39,9 +39,9 @@ No phase is complete until its exit criterion is met. Exit criteria are objectiv
 - Establish the structure in `08_Project_Structure.md` — only the directories that have occupants.
 - Add `@astrojs/sitemap`. Nothing else.
 - Add `astro check` as a script.
-- Connect the repository to Cloudflare Pages and deploy.
+- Connect the repository to Cloudflare and deploy.
 
-**Exit criterion:** a push to `main` produces a successful build and a publicly reachable `*.pages.dev` URL.
+**Exit criterion:** a push to `main` produces a successful build and a publicly reachable `*.workers.dev` URL.
 
 ---
 

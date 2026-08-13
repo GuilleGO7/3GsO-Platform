@@ -10,7 +10,7 @@ Astro 7 with static output, TypeScript in strict mode, plain CSS custom properti
 
 Three production dependencies: Astro, TypeScript and `@astrojs/sitemap`. Adding a fourth requires a recorded justification.
 
-Deployed on Cloudflare Pages. Zero recurring cost is a design constraint.
+Deployed on Cloudflare Workers with static assets. Zero recurring cost is a design constraint.
 
 ## Commands
 

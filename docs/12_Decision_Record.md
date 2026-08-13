@@ -118,10 +118,12 @@ v1 has no business logic, no user input and no persistence. Build-time schema va
 
 **D-022 · Cloudflare Pages, free tier**
 A genuinely free tier with unlimited bandwidth, automatic HTTPS, branch previews, and a free path to server rendering if ever needed. Output is a static directory, so migration cost is near zero.
+*Superseded 2026-08-13 by D-032:* the hosting product is Cloudflare Workers with static assets. The reasoning above is unchanged and still describes why Cloudflare was chosen.
 
 **D-023 · No custom domain in v1; launch on `*.pages.dev`**
 A domain is the only recurring cost the platform would carry, and it blocks nothing. The site URL is read from configuration, so registering one later is a config change and a DNS record.
 *Revisit* whenever the brand benefit is judged worth roughly €10/year. This is the most likely first accepted cost.
+*Amended 2026-08-13 by D-032:* the launch hostname is `*.workers.dev`. The decision not to register a domain in v1 is unchanged.
 
 **D-024 · Zero recurring cost is a constraint, not an aspiration**
 Every technology decision is filtered through it. Accepting a cost requires an entry here.
@@ -166,6 +168,30 @@ Actual production exposure on Astro 5 was near zero: seven of the eight Astro ad
 Migration cost was near zero because the repository contained only the scaffold. The documented architecture survives intact: `src/content.config.ts`, `output: 'static'`, `astro/tsconfigs/strict`, `astro:assets` and `@astrojs/sitemap` all carry over unchanged. Three points of the v6/v7 migration touch the platform and are verified in Phase 2 when the first real content is authored: collections must declare a `glob()` loader (recorded in `08_Project_Structure.md`), Markdown is rendered by Astro's native pipeline rather than remark/rehype, and `compressHTML` now defaults to `'jsx'` whitespace handling.
 
 *Revisit* at the next major, on the same test: whether the current line is the one receiving security fixes.
+
+---
+
+## 2026-08-13 — Hosting and Tooling
+
+**D-032 · Cloudflare Workers with static assets, not Cloudflare Pages**
+Supersedes the hosting mechanism in D-022 and the launch hostname in D-023. Both remain on record as history.
+
+The platform is deployed at `https://3gso-platform.guillego73.workers.dev`. Cloudflare has consolidated static site hosting into Workers with static assets, and that is the product the deployment was created on.
+
+Every property D-022 selected Cloudflare for is unchanged: a genuinely free tier, automatic HTTPS, builds triggered by a push to `main`, per-branch preview deployments, and a path to server rendering that the platform does not need. The build output is still a plain static directory, so the near-zero migration cost D-022 relied on also holds.
+
+What changes is the hostname, and only the hostname. D-023's substance — no custom domain in v1, no recurring cost — stands exactly as written; `*.pages.dev` simply becomes `*.workers.dev`. The site URL is read from `site` in `astro.config.mjs`, so registering a domain later remains a configuration change and a DNS record.
+
+*Revisit* together with D-023, whenever a custom domain is judged worth its cost.
+
+**D-033 · `@astrojs/check` and `typescript` as development dependencies**
+`10_Implementation_Roadmap.md` requires `astro check` as a script in Phase 0, and `11_Technical_Standards.md` requires it to pass before any commit is considered complete. The command does not ship with Astro: it requires `@astrojs/check`, which in turn requires `typescript`.
+
+This does not breach D-005. That rule governs **production** dependencies — the three that reach the build output remain Astro, TypeScript and `@astrojs/sitemap`. `@astrojs/check` is tooling: it runs locally and in CI, never in the output, and adds nothing to what a visitor downloads.
+
+It is recorded anyway, because `11_Technical_Standards.md` requires every added dependency to be recorded, and because a dependency appearing in `package.json` without a stated reason is exactly what D-005 exists to prevent. Note that `typescript` is installed as a development dependency rather than a production one; it is a compile-time tool, and D-005 counts it among the three because the platform is written in it, not because it ships.
+
+*Revisit if* `astro check` stops being the mechanism that satisfies the type-checking requirement.
 
 ---
 
