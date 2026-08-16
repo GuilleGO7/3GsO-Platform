@@ -1,0 +1,179 @@
+/*
+ * 3G'sO — Long-form editorial typography
+ *
+ * Applied by adding `class="prose"` to the container that wraps rendered
+ * Markdown: the project narrative and Thinking pieces.
+ *
+ * This file styles running content only. Page composition, article layouts
+ * and headers belong elsewhere (docs/08_Project_Structure.md).
+ */
+
+.prose {
+	max-width: var(--width-reading);
+	font-size: var(--text-body);
+	line-height: var(--leading-body);
+	color: var(--color-text);
+}
+
+/*
+ * Vertical rhythm through the lobotomised owl: every element gets space
+ * above it except the first. One rule instead of margin declarations on
+ * each element, and nothing to reset at the edges.
+ */
+.prose > * + * {
+	margin-block-start: var(--space-5);
+}
+
+/* ---------------------------------------------------------------
+ * Headings
+ *
+ * Section openings need more space above than below, so a heading reads as
+ * belonging to what follows it rather than floating between two blocks.
+ * --------------------------------------------------------------- */
+
+.prose > h2 {
+	margin-block-start: var(--space-8);
+	font-family: var(--font-display);
+	font-size: var(--text-h2);
+	line-height: var(--leading-h2);
+	letter-spacing: var(--tracking-heading);
+}
+
+.prose > h3 {
+	margin-block-start: var(--space-7);
+	font-family: var(--font-body);
+	font-size: var(--text-h3);
+	font-weight: var(--weight-semibold);
+	line-height: var(--leading-h3);
+}
+
+.prose > h2 + *,
+.prose > h3 + * {
+	margin-block-start: var(--space-4);
+}
+
+/* ---------------------------------------------------------------
+ * Lists
+ * --------------------------------------------------------------- */
+
+.prose ul,
+.prose ol {
+	padding-inline-start: var(--space-5);
+}
+
+.prose li + li {
+	margin-block-start: var(--space-2);
+}
+
+.prose li::marker {
+	color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------------
+ * Quotes
+ *
+ * Marked by an accent rule and indentation rather than by a container:
+ * whitespace is preferred over borders and boxes.
+ * --------------------------------------------------------------- */
+
+.prose blockquote {
+	padding-inline-start: var(--space-5);
+	border-inline-start: 2px solid var(--color-accent);
+	color: var(--color-text-muted);
+	font-family: var(--font-display);
+	font-size: var(--text-body-lg);
+	line-height: var(--leading-body-lg);
+}
+
+/* ---------------------------------------------------------------
+ * Emphasis
+ * --------------------------------------------------------------- */
+
+.prose strong {
+	font-weight: var(--weight-semibold);
+	color: var(--color-text);
+}
+
+.prose em {
+	font-style: italic;
+}
+
+/* ---------------------------------------------------------------
+ * Code
+ *
+ * Technical detail is tertiary content: present for those who want it,
+ * never competing with the narrative.
+ * --------------------------------------------------------------- */
+
+.prose code {
+	font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+	font-size: 0.9em;
+	color: var(--color-text-muted);
+}
+
+.prose pre {
+	padding: var(--space-4);
+	border-radius: var(--radius-md);
+	background-color: var(--color-surface);
+	overflow-x: auto;
+	font-size: var(--text-body-sm);
+	line-height: var(--leading-body-sm);
+}
+
+.prose pre code {
+	font-size: inherit;
+	color: var(--color-text);
+}
+
+/* ---------------------------------------------------------------
+ * Media
+ *
+ * Images may break the reading width, because evidence often needs more
+ * room than prose does. Captions stay secondary.
+ * --------------------------------------------------------------- */
+
+.prose figure {
+	margin-block: var(--space-7);
+}
+
+.prose img {
+	border-radius: var(--radius-md);
+}
+
+.prose figcaption {
+	margin-block-start: var(--space-3);
+	color: var(--color-text-muted);
+	font-size: var(--text-body-sm);
+	line-height: var(--leading-body-sm);
+}
+
+/* ---------------------------------------------------------------
+ * Tables
+ * --------------------------------------------------------------- */
+
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--text-body-sm);
+	line-height: var(--leading-body-sm);
+}
+
+.prose th,
+.prose td {
+	padding: var(--space-3);
+	border-block-end: 1px solid var(--color-border);
+	text-align: start;
+	vertical-align: top;
+}
+
+.prose th {
+	font-weight: var(--weight-semibold);
+}
+
+/* ---------------------------------------------------------------
+ * Separators
+ * --------------------------------------------------------------- */
+
+.prose hr {
+	margin-block: var(--space-8);
+}
