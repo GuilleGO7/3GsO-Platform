@@ -2,7 +2,7 @@
 Document Version: 2.0
 Status: Approved
 Purpose: Define the visual direction and intent of the 3G'sO platform.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Visual System
@@ -25,11 +25,13 @@ It must not look like a generic developer portfolio, a corporate consulting site
 
 ### Committed Direction
 
-**A single light editorial theme.** Warm off-white surface, near-black ink, one restrained accent.
+**A single dark editorial theme.** Charcoal ground, warm off-white type, muted blue-gray structure, one restrained accent.
 
-This is a deliberate rejection of the dark-background-plus-bright-accent convention that dominates developer portfolios. A considered light editorial surface reads as timeless rather than trend-driven, scans better for the primary audience, and puts typography and content — not chrome — in charge of the impression.
+The ground recedes so the typography advances. A dark editorial surface reads as considered and personal rather than merely clean, and it suits a platform whose confidence is quiet: nothing on the page competes with what is being said.
 
-There is no dark mode in v1. Colour tokens are role-named, so introducing one later is a value change rather than a rewrite.
+This is a deliberate rejection of the neon-on-black convention that dominates developer portfolios — a rejection of the *bright accent*, not of the dark ground. The accent is a muted blue-gray at low saturation. There is no glow, no gradient and no glassmorphism, and colour remains emphasis rather than surface. Structure is carried by whitespace and typography, never by chrome.
+
+There is no second theme in v1. Colour tokens are role-named, so introducing one later is a change of values rather than a rewrite. See D-034 for the reversal of the earlier light direction.
 
 ---
 

@@ -76,9 +76,11 @@ One canonical seven-part narrative with a `depth: 'brief' | 'full'` field, repla
 **D-012 · Single light editorial theme; no dark mode in v1**
 Dark-plus-bright-accent is the convention of the developer portfolio the platform is explicitly trying not to be. A considered light editorial surface reads as timeless, scans better for the primary audience, and puts typography in charge of the impression. Tokens are role-named, so a second theme is a change of values.
 *Revisit if* the light theme proves limiting.
+*Reversed 2026-08-13 by D-034:* the committed theme is dark editorial. The objection to dark-plus-*bright*-accent stands and is honoured by the replacement palette; the role-named token claim above is what made the reversal cheap.
 
 **D-013 · Accent `#1F4B3F`**
 A deep green rather than the ubiquitous blue or violet. Distinctive, restrained, and consonant with the platform's growth motif. 9.2:1 against the background — AAA at every size.
+*Superseded 2026-08-13 by D-034:* the accent is `#6E97A3`, a muted blue-gray required by the dark ground. The preference for restraint over a saturated hue is unchanged; only the hue and the surface it sits on differ.
 
 **D-014 · Fraunces (display) + IBM Plex Sans (body)**
 An editorial serif creates the voice; a clear grotesque carries reading and interface text. Both open-source, both self-hosted, three files total. A licensed typeface would introduce a cost the platform does not need.
@@ -192,6 +194,35 @@ This does not breach D-005. That rule governs **production** dependencies — th
 It is recorded anyway, because `11_Technical_Standards.md` requires every added dependency to be recorded, and because a dependency appearing in `package.json` without a stated reason is exactly what D-005 exists to prevent. Note that `typescript` is installed as a development dependency rather than a production one; it is a compile-time tool, and D-005 counts it among the three because the platform is written in it, not because it ships.
 
 *Revisit if* `astro check` stops being the mechanism that satisfies the type-checking requirement.
+
+---
+
+## 2026-08-13 — Visual Direction
+
+**D-034 · Dark editorial theme, reversing D-012 and D-013**
+Reverses the committed direction in D-012 and the accent in D-013. Both remain on record as history; the reasoning that produced them is preserved unchanged.
+
+The light editorial direction was reviewed against an actual visual prototype rather than against its description. Seen built, the dark treatment represents the personality and positioning of 3G'sO more accurately: charcoal and warm off-white read as considered and personal where the off-white surface read as merely clean, and the platform's quiet confidence carries better on a recessive ground that lets typography advance.
+
+**This is not a return to the aesthetic D-012 rejected.** D-012's objection was specific — dark background *plus bright accent*, the neon-on-black convention of the developer portfolio. The approved direction keeps the rejection and drops only the background: the accent is a muted blue-gray at low saturation, there is no neon, no glow, no gradient and no glassmorphism. Composition remains typography-led, whitespace remains the primary means of grouping, and colour remains emphasis rather than surface. Every visual rule in `04_Visual_System.md` survives intact; only the ground and the accent hue change.
+
+D-012's structural claim also survives and is what made this affordable: tokens are named by role, so the reversal was a change of seven values rather than a change of code.
+
+Approved palette, implemented in `src/styles/tokens.css`:
+
+| Token | Value |
+|---|---|
+| `--color-bg` | `#1C1D1F` |
+| `--color-surface` | `#23252A` |
+| `--color-border` | `#3E6673` |
+| `--color-text` | `#F2EEE7` |
+| `--color-text-muted` | `#A6A7A4` |
+| `--color-accent` | `#6E97A3` |
+| `--color-accent-contrast` | `#1C1D1F` |
+
+Two notes the palette carries with it. The accent was verified before adoption: the prototype's `#3E6673` measures 2.69:1 against the background and cannot carry links or focus rings, so `#6E97A3` — 5.32:1, the most restrained value in the family that clears AA — takes the accent role, and `#3E6673` is confined to dividers and subtle structure. That confinement is a constraint, not a preference: at 2.69:1 it sits below the 3:1 required of interface boundaries, which is acceptable for the decorative dividers v1 uses and would not be acceptable for a control. `11_Technical_Standards.md` is unchanged by this decision; its thresholds are theme-independent and the palette was chosen to meet them.
+
+*Revisit if* the dark ground proves limiting, on the same test that produced this entry: reviewing a real build rather than a description.
 
 ---
 

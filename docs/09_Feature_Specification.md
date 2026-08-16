@@ -2,7 +2,7 @@
 Document Version: 2.0
 Status: Approved
 Purpose: Define the functional scope of the 3G'sO platform and the exact boundaries of v1.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Feature Specification
@@ -99,7 +99,7 @@ Removed or deferred, each with the condition that would bring it back.
 | Contact form | A direct email link demonstrably loses contacts |
 | Analytics | A specific question needs measuring; must remain free and cookieless |
 | Custom domain | Worth the recurring cost; no code impact |
-| Dark mode | The light theme proves limiting |
+| A second theme, and any theme switching | The single dark theme proves limiting (D-034) |
 | Spanish / i18n | The audience proves ES-primary; strings already externalized |
 | RSS | Ships alongside Thinking if Thinking ships |
 | MDX | A project page genuinely needs components inline |

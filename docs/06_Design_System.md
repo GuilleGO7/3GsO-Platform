@@ -2,7 +2,7 @@
 Document Version: 2.0
 Status: Approved
 Purpose: Define the concrete design tokens, component rules and responsive behaviour of the 3G'sO platform.
-Last Updated: 2026-08-12
+Last Updated: 2026-08-13
 ---
 
 # Design System
@@ -15,9 +15,9 @@ Tokens are implemented as CSS custom properties in `src/styles/tokens.css`. Comp
 
 ## Theme
 
-**One light editorial theme.** No dark mode in v1.
+**One dark editorial theme.** No second theme in v1.
 
-Tokens are named by role, not by appearance, so a second theme becomes a change of values rather than a change of code.
+Tokens are named by role, not by appearance, so a second theme becomes a change of values rather than a change of code. The reversal recorded in D-034 is the proof: it changed seven values and no code.
 
 ---
 
@@ -27,24 +27,29 @@ Seven tokens. Every value below is final.
 
 | Token | Value | Use |
 |---|---|---|
-| `--color-bg` | `#FAF9F6` | Page background |
-| `--color-surface` | `#F1EFEA` | Raised or grouped surfaces |
-| `--color-border` | `#E2DFD8` | Dividers, hairlines, input borders |
-| `--color-text` | `#1A1A18` | Primary text |
-| `--color-text-muted` | `#6B6862` | Secondary text, metadata, captions |
-| `--color-accent` | `#1F4B3F` | Links, focus rings, selected states, key emphasis |
-| `--color-accent-contrast` | `#FAF9F6` | Text on accent surfaces |
+| `--color-bg` | `#1C1D1F` | Page background |
+| `--color-surface` | `#23252A` | Raised or grouped surfaces |
+| `--color-border` | `#3E6673` | Dividers and hairlines only — see below |
+| `--color-text` | `#F2EEE7` | Primary text |
+| `--color-text-muted` | `#A6A7A4` | Secondary text, metadata, captions |
+| `--color-accent` | `#6E97A3` | Links, focus rings, selected states, key emphasis |
+| `--color-accent-contrast` | `#1C1D1F` | Text on accent surfaces |
 
 ### Verified Contrast
 
+Measured against the values above, to the thresholds in `11_Technical_Standards.md`.
+
 | Pair | Ratio | Result |
 |---|---|---|
-| `--color-text` on `--color-bg` | 16.4:1 | AAA |
-| `--color-text-muted` on `--color-bg` | 5.2:1 | AA |
-| `--color-accent` on `--color-bg` | 9.2:1 | AAA |
-| `--color-accent-contrast` on `--color-accent` | 9.2:1 | AAA |
+| `--color-text` on `--color-bg` | 14.59:1 | AAA |
+| `--color-text-muted` on `--color-bg` | 6.98:1 | AA |
+| `--color-accent` on `--color-bg` | 5.32:1 | AA |
+| `--color-accent-contrast` on `--color-accent` | 5.32:1 | AA |
+| `--color-border` on `--color-bg` | 2.69:1 | Decorative only |
 
-All four pairs pass AA at every size in the type scale. `--color-text-muted` clears AA for normal text but not AAA, so it is used for secondary content only, never for primary reading text.
+The first four pairs pass AA at every size in the type scale. `--color-text-muted` clears AA for normal text but not AAA, so it is used for secondary content only, never for primary reading text.
+
+**`--color-border` is not an accessible foreground colour.** At 2.69:1 it sits below the 3:1 required of interface boundaries and far below the 4.5:1 required of text. It is permitted only for dividers and hairlines, which WCAG treats as decorative — the use v1 makes of it, since no forms exist. It must never carry text, an icon that conveys meaning, a focus indicator, or the boundary of a control. Any of those requires a value that clears its threshold; `--color-accent` already does.
 
 ### Semantic Colours
 
@@ -61,7 +66,7 @@ All four pairs pass AA at every size in the type scale. `--color-text-muted` cle
 
 ## Typography Tokens
 
-Two families. Three files. Self-hosted `woff2`, latin subset, in `public/fonts/`, preloaded, `font-display: swap`.
+Two families. Two files. Self-hosted `woff2`, latin subset, in `public/fonts/`, preloaded, `font-display: swap`.
 
 | Role | Family | Weights | Token |
 |---|---|---|---|
@@ -157,7 +162,9 @@ Nothing larger. Excessive rounding reads playful and generic.
 Two levels.
 
 `--elevation-flat: none` — the default for almost everything
-`--elevation-subtle: 0 1px 2px rgba(26, 26, 24, 0.06), 0 4px 12px rgba(26, 26, 24, 0.04)`
+`--elevation-subtle: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2)`
+
+Shadows are black at a strength the dark ground requires. The earlier values were tinted with the light theme's ink and carried its alpha, both of which are invisible on `--color-bg` (D-034).
 
 Hierarchy comes from spacing and contrast first. Elevation is used only when it communicates a real relationship — never for decoration.
 
