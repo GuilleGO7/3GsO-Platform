@@ -1,7 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ui } from '../data/ui';
+
+/*
+ * The Home page is composed in Phase 3 and its copy comes from
+ * src/data/profile.ts in Phase 2. Until then this route carries the identity
+ * and nothing else — but it still has to render a valid document, which means
+ * exactly one h1 (docs/11_Technical_Standards.md).
+ *
+ * The description is the definition in docs/00_Project_Vision.md rather than
+ * new copy. It moves to profile.ts alongside the rest of the identity text.
+ */
+const description = "3G'sO is the digital identity of Guillermo Guzmán González Ortiz.";
 ---
 
-<BaseLayout title="Astro" description="Placeholder page. The home page is implemented in Phase 3.">
-	<h1>Astro</h1>
+<BaseLayout title={ui.siteName} description={description}>
+	<h1>{ui.siteName}</h1>
 </BaseLayout>
