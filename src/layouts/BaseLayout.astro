@@ -18,7 +18,7 @@ interface Props {
 	title: string;
 	/** One-sentence summary for search results and link previews. */
 	description: string;
-	/** Social preview image, root-relative (e.g. `/og/project.png`). Omitted when absent. */
+	/** Social preview image, root-relative (e.g. `/og/project.png`). Falls back to the site default. */
 	image?: string;
 	/** Overrides the canonical path when a page is reachable at more than one URL. */
 	canonical?: string;
@@ -35,7 +35,13 @@ const { title, description, image, canonical, type = 'website', noindex = false 
  * registering a domain later stays a configuration change (D-023, D-032).
  */
 const canonicalUrl = new URL(canonical ?? Astro.url.pathname, Astro.site);
-const imageUrl = image ? new URL(image, Astro.site) : undefined;
+
+/*
+ * Every page previews with an image. Pages override it as soon as they have
+ * one of their own — a project cover, for instance.
+ */
+const DEFAULT_OG_IMAGE = '/og/default.png';
+const imageUrl = new URL(image ?? DEFAULT_OG_IMAGE, Astro.site);
 ---
 
 <html lang="en">
@@ -76,12 +82,12 @@ const imageUrl = image ? new URL(image, Astro.site) : undefined;
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={ui.siteName} />
-		{imageUrl && <meta property="og:image" content={imageUrl} />}
+		<meta property="og:image" content={imageUrl} />
 
-		<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+		<meta name="twitter:image" content={imageUrl} />
 	</head>
 
 	<body>
