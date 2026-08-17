@@ -8,6 +8,10 @@ import { ui } from '../data/ui';
  * and nothing else — but it still has to render a valid document, which means
  * exactly one h1 (docs/11_Technical_Standards.md).
  *
+ * The heading is hidden visually rather than removed: the header already shows
+ * the wordmark, so rendering it again would read as a duplicate. It stays in
+ * the accessibility tree, and Phase 3 replaces it with the real hero heading.
+ *
  * The description is the definition in docs/00_Project_Vision.md rather than
  * new copy. It moves to profile.ts alongside the rest of the identity text.
  */
@@ -15,5 +19,19 @@ const description = "3G'sO is the digital identity of Guillermo Guzmán Gonzále
 ---
 
 <BaseLayout title={ui.siteName} description={description}>
-	<h1>{ui.siteName}</h1>
+	<h1 class="visually-hidden">{ui.siteName}</h1>
 </BaseLayout>
+
+<style>
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>
