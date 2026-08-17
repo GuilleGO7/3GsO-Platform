@@ -178,7 +178,7 @@ Migration cost was near zero because the repository contained only the scaffold.
 **D-032 · Cloudflare Workers with static assets, not Cloudflare Pages**
 Supersedes the hosting mechanism in D-022 and the launch hostname in D-023. Both remain on record as history.
 
-The platform is deployed at `https://3gso-platform.guillego73.workers.dev`. Cloudflare has consolidated static site hosting into Workers with static assets, and that is the product the deployment was created on.
+The platform is deployed at `https://3gso-platform.guilleggo73.workers.dev`. Cloudflare has consolidated static site hosting into Workers with static assets, and that is the product the deployment was created on.
 
 Every property D-022 selected Cloudflare for is unchanged: a genuinely free tier, automatic HTTPS, builds triggered by a push to `main`, per-branch preview deployments, and a path to server rendering that the platform does not need. The build output is still a plain static directory, so the near-zero migration cost D-022 relied on also holds.
 

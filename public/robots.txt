@@ -5,4 +5,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://3gso-platform.guillego73.workers.dev/sitemap-index.xml
+Sitemap: https://3gso-platform.guilleggo73.workers.dev/sitemap-index.xml
