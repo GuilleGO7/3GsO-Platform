@@ -1,0 +1,146 @@
+---
+/**
+ * Site identity and primary navigation.
+ *
+ * Persistent across every page, deliberately quiet: navigation is secondary
+ * to the content it sits above.
+ */
+import { primaryNav, connectNav, isCurrent } from '../data/nav';
+import { ui } from '../data/ui';
+
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+	<div class="inner">
+		<a class="wordmark" href="/" aria-label={ui.homeLinkLabel}>{ui.siteName}</a>
+
+		<nav aria-label={ui.primaryNavLabel}>
+			<ul>
+				{
+					primaryNav.map((item) => (
+						<li>
+							<a
+								href={item.href}
+								aria-current={isCurrent(path, item.href) ? 'page' : undefined}
+							>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+				<li>
+					<a
+						class="connect"
+						href={connectNav.href}
+						aria-current={isCurrent(path, connectNav.href) ? 'page' : undefined}
+					>
+						{connectNav.label}
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		padding-block: var(--space-5);
+		padding-inline: var(--gutter);
+	}
+
+	.inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: var(--space-4) var(--space-6);
+		max-width: var(--width-standard);
+		margin-inline: auto;
+	}
+
+	.wordmark {
+		font-family: var(--font-display);
+		font-size: var(--text-h3);
+		color: var(--color-text);
+		text-decoration: none;
+		transition: color var(--duration-base) var(--ease-standard);
+	}
+
+	.wordmark:hover {
+		color: var(--color-accent);
+	}
+
+	nav {
+		margin-inline-start: auto;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-2) var(--space-5);
+		list-style: none;
+		padding: 0;
+	}
+
+	/*
+	 * Navigation recedes until wanted: muted by default, resolving to full
+	 * text colour on hover and on the current page.
+	 */
+	nav a {
+		display: inline-block;
+		padding-block: var(--space-2);
+		color: var(--color-text-muted);
+		font-size: var(--text-label);
+		font-weight: var(--weight-semibold);
+		letter-spacing: var(--tracking-label);
+		text-decoration: none;
+		transition: color var(--duration-base) var(--ease-standard);
+	}
+
+	nav a:hover {
+		color: var(--color-text);
+	}
+
+	/*
+	 * The current page is marked by colour and a rule, never by colour alone.
+	 */
+	nav a[aria-current='page'] {
+		color: var(--color-text);
+		box-shadow: inset 0 -1px 0 0 var(--color-accent);
+	}
+
+	/*
+	 * Connect reads as an action rather than a fifth destination. The outline
+	 * uses the accent because --color-border sits below the 3:1 a control
+	 * boundary requires.
+	 */
+	.connect {
+		padding-inline: var(--space-4);
+		border: 1px solid var(--color-accent);
+		border-radius: var(--radius-pill);
+		color: var(--color-accent);
+		transition:
+			color var(--duration-base) var(--ease-standard),
+			background-color var(--duration-base) var(--ease-standard);
+	}
+
+	.connect:hover {
+		background-color: var(--color-accent);
+		color: var(--color-accent-contrast);
+	}
+
+	.connect[aria-current='page'] {
+		background-color: var(--color-accent);
+		color: var(--color-accent-contrast);
+		box-shadow: none;
+	}
+
+	/* Identity above navigation on the narrowest screens; a row from sm up. */
+	@media (max-width: 639px) {
+		nav {
+			margin-inline-start: 0;
+			width: 100%;
+		}
+	}
+</style>

@@ -1,0 +1,177 @@
+---
+/**
+ * Designed recovery page.
+ *
+ * Offers the real destinations rather than a dead end (doc 02, doc 03).
+ * The list is built from the same navigation source as the header and
+ * footer, so a change to the architecture cannot leave it stale.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { primaryNav, connectNav } from '../data/nav';
+import { ui } from '../data/ui';
+
+const destinations = [...primaryNav.filter((item) => item.href !== '/'), connectNav];
+---
+
+<BaseLayout title={ui.notFound.title} description={ui.notFound.description} noindex>
+	<section class="not-found">
+		<p class="code">{ui.notFound.code}</p>
+		<h1>{ui.notFound.title}</h1>
+		<p class="lede">{ui.notFound.body}</p>
+
+		<h2 class="next-heading">{ui.notFound.nextHeading}</h2>
+		<ul class="destinations">
+			{
+				destinations.map((item) => (
+					<li>
+						<a href={item.href}>
+							<span class="label">{item.label}</span>
+							<span class="marker" aria-hidden="true">
+								&rarr;
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>
+
+<style>
+	.not-found {
+		max-width: var(--width-standard);
+		margin-inline: auto;
+		padding-block: var(--space-9) var(--space-8);
+		padding-inline: var(--gutter);
+	}
+
+	/*
+	 * Each block rises into place in sequence. `backwards` keeps the fill from
+	 * the animation rather than from a base rule, so the content is visible
+	 * even if the animation never runs.
+	 */
+	.code,
+	h1,
+	.lede,
+	.next-heading,
+	.destinations {
+		animation: rise-in var(--duration-slow) var(--ease-standard) backwards;
+	}
+
+	h1 {
+		animation-delay: var(--duration-fast);
+	}
+
+	.lede {
+		animation-delay: var(--duration-base);
+	}
+
+	.next-heading,
+	.destinations {
+		animation-delay: var(--duration-slow);
+	}
+
+	@keyframes rise-in {
+		from {
+			opacity: 0;
+			transform: translateY(var(--space-3));
+		}
+	}
+
+	.code {
+		color: var(--color-text-muted);
+		font-size: var(--text-label);
+		font-weight: var(--weight-semibold);
+		letter-spacing: var(--tracking-label);
+	}
+
+	h1 {
+		max-width: var(--width-reading);
+		margin-block-start: var(--space-5);
+		font-size: var(--text-display);
+		line-height: var(--leading-display);
+		letter-spacing: var(--tracking-display);
+	}
+
+	.lede {
+		max-width: var(--width-reading);
+		margin-block-start: var(--space-5);
+		color: var(--color-text-muted);
+		font-size: var(--text-body-lg);
+		line-height: var(--leading-body-lg);
+	}
+
+	.next-heading {
+		margin-block-start: var(--space-9);
+		color: var(--color-text-muted);
+		font-family: var(--font-body);
+		font-size: var(--text-label);
+		font-weight: var(--weight-semibold);
+		letter-spacing: var(--tracking-label);
+	}
+
+	.destinations {
+		max-width: var(--width-reading);
+		margin-block-start: var(--space-5);
+		padding: 0;
+		list-style: none;
+		border-block-start: 1px solid var(--color-border);
+	}
+
+	.destinations li {
+		border-block-end: 1px solid var(--color-border);
+	}
+
+	/*
+	 * The whole row is the target, which keeps it comfortably above the
+	 * 44px minimum without padding a small text link.
+	 */
+	.destinations a {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-4);
+		padding-block: var(--space-5);
+		color: var(--color-text);
+		text-decoration: none;
+		transition: color var(--duration-base) var(--ease-standard);
+	}
+
+	.label {
+		font-family: var(--font-display);
+		font-size: var(--text-h2);
+		line-height: var(--leading-h2);
+		letter-spacing: var(--tracking-heading);
+		transition: transform var(--duration-base) var(--ease-standard);
+	}
+
+	/* The marker moves rather than appears: nothing is communicated by motion. */
+	.marker {
+		color: var(--color-accent);
+		transition: transform var(--duration-base) var(--ease-standard);
+	}
+
+	.destinations a:hover {
+		color: var(--color-accent);
+	}
+
+	.destinations a:hover .label,
+	.destinations a:hover .marker {
+		transform: translateX(var(--space-2));
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.code,
+		h1,
+		.lede,
+		.next-heading,
+		.destinations {
+			animation-delay: 0s;
+		}
+
+		.destinations a:hover .label,
+		.destinations a:hover .marker {
+			transform: none;
+		}
+	}
+</style>

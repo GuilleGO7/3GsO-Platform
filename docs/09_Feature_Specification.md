@@ -78,7 +78,7 @@ Email and external professional profiles, with enough context on what is worth r
 - **Responsive** across three breakpoints, adapt-by-default per `02_Experience_Architecture.md`.
 - **Accessible** to WCAG 2.2 AA, verified per `11_Technical_Standards.md`.
 - **Fast**, against the measured budget in `11_Technical_Standards.md`.
-- **Discoverable** — per-page title, description, canonical URL, Open Graph and Twitter tags, static social preview images, `sitemap.xml`, `robots.txt`.
+- **Discoverable** — per-page title, description, canonical URL, Open Graph and Twitter tags, static social preview images, `sitemap-index.xml`, `robots.txt`.
 
 Metadata is foundational, not an optimization step: the project-driven journey depends entirely on how a shared link previews.
 

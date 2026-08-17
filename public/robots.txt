@@ -1,0 +1,8 @@
+# 3G'sO
+# Nothing on this platform is private, so nothing is disallowed.
+# The 404 excludes itself with a robots meta tag rather than a rule here.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://3gso-platform.guillego73.workers.dev/sitemap-index.xml

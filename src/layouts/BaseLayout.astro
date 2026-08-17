@@ -1,0 +1,121 @@
+---
+/**
+ * The document shell every page is built from.
+ *
+ * Owns the html element, the head, the global stylesheets and the shared
+ * accessibility foundations. Pages supply their own metadata through props;
+ * nothing page-specific is hard-coded here.
+ */
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/prose.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { ui } from '../data/ui';
+
+interface Props {
+	/** Page title. Used verbatim for <title>, Open Graph and Twitter. */
+	title: string;
+	/** One-sentence summary for search results and link previews. */
+	description: string;
+	/** Social preview image, root-relative (e.g. `/og/project.png`). Omitted when absent. */
+	image?: string;
+	/** Overrides the canonical path when a page is reachable at more than one URL. */
+	canonical?: string;
+	/** Open Graph type. `article` for a project or a piece of thinking. */
+	type?: 'website' | 'article';
+	/** Keeps a page out of search results. Set on pages that are not destinations, such as 404. */
+	noindex?: boolean;
+}
+
+const { title, description, image, canonical, type = 'website', noindex = false } = Astro.props;
+
+/*
+ * Every absolute URL is resolved against `site` in astro.config.mjs, so
+ * registering a domain later stays a configuration change (D-023, D-032).
+ */
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, Astro.site);
+const imageUrl = image ? new URL(image, Astro.site) : undefined;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		{
+			noindex ? (
+				<meta name="robots" content="noindex, follow" />
+			) : (
+				<link rel="canonical" href={canonicalUrl} />
+			)
+		}
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<link
+			rel="preload"
+			href="/fonts/fraunces-latin-var.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/ibm-plex-sans-latin-var.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<meta property="og:type" content={type} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={ui.siteName} />
+		{imageUrl && <meta property="og:image" content={imageUrl} />}
+
+		<meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+	</head>
+
+	<body>
+		<a class="skip-link" href="#main">{ui.skipToContent}</a>
+
+		<SiteHeader />
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<SiteFooter />
+	</body>
+</html>
+
+<style>
+	/*
+	 * Off-screen until focused, never hidden from the accessibility tree, so
+	 * a keyboard user reaches content without traversing what precedes it.
+	 */
+	.skip-link {
+		position: fixed;
+		inset-block-start: var(--space-2);
+		inset-inline-start: var(--space-2);
+		z-index: 100;
+		padding: var(--space-2) var(--space-4);
+		border-radius: var(--radius-sm);
+		background-color: var(--color-accent);
+		color: var(--color-accent-contrast);
+		text-decoration: none;
+		transform: translateY(-250%);
+	}
+
+	.skip-link:focus {
+		transform: translateY(0);
+	}
+</style>
