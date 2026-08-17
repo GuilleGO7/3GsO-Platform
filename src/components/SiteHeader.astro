@@ -88,8 +88,16 @@ const path = Astro.url.pathname;
 	 * text colour on hover and on the current page.
 	 */
 	nav a {
-		display: inline-block;
-		padding-block: var(--space-2);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		/*
+		 * The 44px touch-target minimum in docs/11_Technical_Standards.md.
+		 * Set as a floor rather than derived from padding, so the target holds
+		 * at every step of the fluid label size instead of only at the largest.
+		 */
+		min-block-size: 44px;
+		min-inline-size: 44px;
 		color: var(--color-text-muted);
 		font-size: var(--text-label);
 		font-weight: var(--weight-semibold);

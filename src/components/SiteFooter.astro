@@ -80,8 +80,11 @@ const items = [...primaryNav, connectNav];
 	}
 
 	a:not(.wordmark) {
-		display: inline-block;
-		padding-block: var(--space-2);
+		display: inline-flex;
+		align-items: center;
+		/* The 44px touch-target minimum in docs/11_Technical_Standards.md. */
+		min-block-size: 44px;
+		min-inline-size: 44px;
 		color: var(--color-text-muted);
 		font-size: var(--text-body-sm);
 		text-decoration: none;
