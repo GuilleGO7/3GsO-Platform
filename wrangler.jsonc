@@ -1,0 +1,23 @@
+{
+	// Cloudflare Workers with static assets (D-032).
+	//
+	// This is an assets-only Worker: there is no `main` entry point and no
+	// server code, so the platform stays the plain static site the
+	// architecture calls for (07_Technology_Architecture.md). Cloudflare
+	// serves the directory Astro builds and nothing else runs.
+	//
+	// `name` must match the existing Worker. Changing it deploys somewhere
+	// else and the production URL moves with it.
+	"name": "3gso-platform",
+	"compatibility_date": "2026-08-18",
+
+	"assets": {
+		// Astro's build output. `npm run build` writes here.
+		"directory": "./dist",
+
+		// Serve the designed 404 page for unmatched routes, with a 404 status.
+		// The default ("none") returns an empty body, which leaves the visitor
+		// at a dead end — the one thing 02_Experience_Architecture.md forbids.
+		"not_found_handling": "404-page"
+	}
+}
